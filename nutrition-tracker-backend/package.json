@@ -1,0 +1,31 @@
+{
+  "name": "nutrition-app-backend",
+  "version": "1.0.0",
+  "description": "Nutrition tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GregM1991/nutrition-tracker-app-MERN.git"
+  },
+  "author": "The mad dogs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GregM1991/nutrition-tracker-app-MERN/issues"
+  },
+  "homepage": "https://github.com/GregM1991/nutrition-tracker-app-MERN#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.22"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
