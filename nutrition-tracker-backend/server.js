@@ -4,7 +4,9 @@ const app = express();
 
 connectDatabase();
 
-app.get('/', (req, res) => res.send('Backend Running oioioi'));
+app.get('/', (req, res) => res.send('You hit the API Root'));
+
+app.use('/api/users', require('./routes/api/users'));
 
 const PORT = process.env.PORT || 3000;
 
