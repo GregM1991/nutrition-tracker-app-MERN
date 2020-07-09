@@ -1,8 +1,10 @@
 const express = require('express');
-
+const connectDatabase = require('./config/db');
 const app = express();
 
-app.get('/', (req, res) => res.send('Backend Running'));
+connectDatabase();
+
+app.get('/', (req, res) => res.send('Backend Running oioioi'));
 
 const PORT = process.env.PORT || 3000;
 
