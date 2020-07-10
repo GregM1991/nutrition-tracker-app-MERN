@@ -1,15 +1,14 @@
 import React from 'react'
-import Request from './Request'
+import SearchController from './components/SearchController'
 
 const App = () => {
   return (
       <div>
           <div className="ui container" style={{marginTop: '10px'}}>
-            <SearchBar />
+            <SearchController/>
           </div>
-          <h1>Tired of your dad Bod?</h1>
-          <h3>NutriTrack Now!</h3>
-          <Request />
       </div>
   )
 }
+
+export default App
