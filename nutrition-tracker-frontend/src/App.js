@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Avatar from "react-avatar";
 import SearchController from "./components/SearchController";
 import FoodList from "./components/FoodList";
+import NutritionTotals from "./components/NutritionTotals";
 
 const App = () => {
   // const [update, setUpdate] = useState(false);
