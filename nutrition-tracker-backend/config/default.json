@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://jaeg:ilovenerds@nutritiontracker.i7r6y.mongodb.net/<dbname>?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://jaeg:ilovenerds@nutritiontracker.i7r6y.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }
