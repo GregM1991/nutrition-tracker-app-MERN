@@ -7,21 +7,11 @@ import axios from 'axios';
 
 class SearchController extends React.Component {
   state = {
-    searchValue: '',
-    currentFood: '',
-    currentNutritionData: ''
+    searchValue: ''
   };
 
   handleSubmit = () => {
     nutritionRequest(this.state.searchValue)
-      .then((res) => {
-        this.setState({
-          currentNutritionData: JSON.stringify(
-            res.data.parsed[0].food.nutrients
-          )
-        });
-        return res;
-      })
       .then((res) => {
         const data = {
           newMeal: {
@@ -36,7 +26,7 @@ class SearchController extends React.Component {
 
         axios
           .put(
-            'http://localhost:3000/api/users/5f07bb66ca715df136270367',
+            'http://localhost:3000/api/users/5f07f5db82f62707f6aa0e17',
             JSON.stringify(data),
             {
               headers: { 'Content-Type': 'application/json' }
