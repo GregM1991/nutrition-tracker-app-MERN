@@ -1,14 +1,14 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 class FoodList extends React.Component {
   state = {
-    foodArray: []
+    foodArray: [],
   };
 
   requestFoods = () => {
     axios
-      .get('http://localhost:3000/api/users/5f07f5db82f62707f6aa0e17')
+      .get("http://localhost:3000/api/users/5f07f5db82f62707f6aa0e17")
       .then((res) => {
         console.log(res);
         this.setState({ foodArray: res.data.trackedmeal });
@@ -21,14 +21,24 @@ class FoodList extends React.Component {
 
   render() {
     return (
-      <div className='make-this-look-good'>
+      <div className="ui grid">
         {this.state.foodArray.map((food) => (
-          <div>
-            <li>Name: {food.name}</li>
-            <li>Calories: {food.calories}</li>
-            <li>Protein: {food.protein}</li>
-            <li>Carbs: {food.carbs}</li>
-            <li>Fat: {food.fat}</li>
+          <div className="ui card">
+            <div className="ui content header">
+              <b>{food.name}</b>
+            </div>
+            <div className="ui content">
+              <b>Calories:</b> {food.calories}
+            </div>
+            <div className="ui content">
+              <b>Protein:</b> {food.protein}
+            </div>
+            <div className="ui content">
+              <b>Carbs:</b> {food.carbs}
+            </div>
+            <div className="ui content">
+              <b>Fat:</b> {food.fat}
+            </div>
           </div>
         ))}
       </div>
