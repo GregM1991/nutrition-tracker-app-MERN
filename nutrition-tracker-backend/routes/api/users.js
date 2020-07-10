@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { check, validitionResult } = require('express-validator');
-const User = require('models/User');
+const { check, validationResult } = require('express-validator');
+const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -41,7 +41,7 @@ router.post(
 
       const salt = await bcrypt.genSalt(10);
 
-      user.password = await bcrupt.hash(password, salt);
+      user.password = await bcrypt.hash(password, salt);
 
       await user.save();
 
@@ -68,31 +68,56 @@ router.post(
 );
 
 // @route   GET api/users
-// @desc    Get list of users
+// @desc    Get all users
 // @access  Public
 router.get('/', async (req, res) => {
-  let user = await User.findOne({ email });
+  const users = await User.find();
+
+  try {
+    res.send(users);
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
 });
 
 // @route   GET api/users/:id
 // @desc    Get a single user
 // @access  Public
 router.get('/:id', async (req, res) => {
-  let user = await User.findOne({ email });
+  let user = await User.findById(req.params.id);
+  try {
+    res.send(user);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
-// @route   GET api/users
+// @route   PUT api/users
 // @desc    Get list of users
 // @access  Private
-router.put('/:id', (req, res) => {
-  // update user and return user/jwt
-  // res.send(req.params.id)
+router.put('/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    newTrackedMeals = [...user.trackedmeal, req.body.newMeal];
+    await user.update({ trackedmeal: newTrackedMeals });
+    res.send('User updated!');
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+  // res.send(req.params.id) Change user to updatedUser or something
 });
 
-// @route   GET api/users
-// @desc    Get list of users
+// @route   DELETE api/users/:id
+// @desc    Delete a user
 // @access  Private
-router.delete('/:id', (req, res) => {
-  // delete specified user
-  // res.send(req.params.id)
+router.delete('/:id', async (req, res) => {
+  try {
+    await User.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: 'User has been deleted' });
+  } catch (error) {
+    res.status(500).send('Something went wrong!');
+  }
 });
+
+module.exports = router;
