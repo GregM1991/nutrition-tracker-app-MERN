@@ -3,13 +3,8 @@ const router = express.Router();
 const { check, validitionResult } = require('express-validator');
 const User = require('models/User');
 const bcrypt = require('bcryptjs');
-
-// @route   GET api/users
-// @desc    Get users
-// @access  Public
-router.get('/', (req, res) => {
-  res.send('User route');
-});
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 // @route   POST api/users
 // @desc    Register user
@@ -50,10 +45,54 @@ router.post(
 
       await user.save();
 
-      res.send('User registered');
+      const payload = {
+        user: {
+          id: user.id
+        }
+      };
+
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 36000 },
+        (error, token) => {
+          if (error) throw error;
+          res.json({ token });
+        }
+      );
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server error');
     }
   }
 );
+
+// @route   GET api/users
+// @desc    Get list of users
+// @access  Public
+router.get('/', async (req, res) => {
+  let user = await User.findOne({ email });
+});
+
+// @route   GET api/users/:id
+// @desc    Get a single user
+// @access  Public
+router.get('/:id', async (req, res) => {
+  let user = await User.findOne({ email });
+});
+
+// @route   GET api/users
+// @desc    Get list of users
+// @access  Private
+router.put('/:id', (req, res) => {
+  // update user and return user/jwt
+  // res.send(req.params.id)
+});
+
+// @route   GET api/users
+// @desc    Get list of users
+// @access  Private
+router.delete('/:id', (req, res) => {
+  // delete specified user
+  // res.send(req.params.id)
+});
