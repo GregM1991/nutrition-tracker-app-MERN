@@ -8,7 +8,6 @@ const Request = () => {
   const [nutritionValues, setNutritionValues] = useState("")
 
   useEffect(() => {
-
     nutritionRequest(input)
     .then((res) => {
       setNutritionValues(JSON.stringify(res.data.parsed[0].food.nutrients)) 
